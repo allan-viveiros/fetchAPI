@@ -1,0 +1,144 @@
+body {
+    background-color: #121212;
+    color: #E0E0E0;
+    font-size: 18px;
+}
+
+.container {
+    background-color: #1E1E1E;
+    padding: 10px;
+    margin: 5px 0px 5px 0px;
+    border: #FFF solid 1px;
+    width: 55%;
+}
+
+.submit-button {
+    background-color: #03DAC6;
+    color: #000;
+    font-size: 18px;
+}
+
+.search-bar {
+    background-color: #03DAC6;
+    color: #000;
+    font-size: 18px;
+}
+
+/* Fetch API */
+h3 {
+    padding: 0px;
+    margin: 0px 10px 0px 0px;
+}
+
+/* Weather */
+.forecast {
+    padding: 10px 0px 10px 0px;
+}
+
+span {   
+    padding: 5px;
+    max-height: 20px;
+    margin: 2px;
+}
+
+/* wind speed */
+.calm {
+    background-color: #0045FF;
+}
+.light {
+    background-color: #00A1E6;
+}
+.moderate {
+    background-color: #00D18C;
+}
+.fresh {
+    background-color: #A1E633;
+}
+.strong {
+    background-color: #E6DC33;
+}
+.gale {
+    background-color: #F08229;
+}
+.storm {
+    background-color: #F00000;
+}
+.hurricane {
+    background-color: #FF00FF;
+}
+
+/* Precipitation amount*/
+.rain-0 {
+    background-color: #FFF;
+    color: #121212;
+    text-decoration: tomato;
+}
+.rain-1 {
+    background-color: #E8E8E8;
+}
+.rain-2 {
+    background-color: #E2FCFC;
+}
+.rain-3 {
+    background-color: #95F4F4;
+}
+.rain-4 {
+    background-color: #89CDF0;
+}
+.rain-5 {
+    background-color: #749AE3;
+}
+.rain-6 {
+    background-color: #4545D9;
+}
+.rain-7 {
+    background-color: #6232D4;
+}
+.rain-8 {
+    background-color: #8810CA;
+}
+.rain-9 {
+    background-color: #E209E2;
+}
+
+
+/* Coin exchange */
+.container-align {
+    margin: 5px 0px 15px 0px;
+    font-size: 18px;        
+}
+
+.coin-input {
+    background-color: #BB86FC;
+    color: #000;
+    font-size: 18px;
+}
+
+.coin-color {
+    color: #BB86FC;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 5px 0px 5px 0px;
+}
+
+.submit-coin {
+    background-color: #BB86FC;
+    color: #000;
+    font-size: 18px;
+}
+
+.coin-name {
+    margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #3A2D49;
+    color: #B895D6;
+    text-align: center;
+    padding: 5px;
+  }

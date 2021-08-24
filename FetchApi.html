@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Fetch Api </title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        // Name age selection
+        let search;
+        let myName;
+        let age;
+        let count;
+        let country;
+
+        // coins
+        let coin_Exc;
+        let coin_Amount;
+        let coinExchange;
+        let coinRate;
+        let coinName;
+
+        // weather
+        let cloud;
+        let seeing;
+        let rh2m;
+        let wind_direction;
+        let wind_speed;
+        let temp;
+        let prec_type;
+
+
+        window.onload = () => {
+            search = document.querySelector('.search-bar');
+            myName = document.querySelector('.my-name');
+            age = document.querySelector('.age');
+            count = document.querySelector('.count');
+            country = document.querySelector('.country');
+
+            // coins            
+            coin_Exc = document.querySelector('.coin-exc');
+            coin_Amount = document.querySelector('.coin-amount');
+            coinExchange = document.querySelector('.exchange');
+            coinRate = document.querySelector('.rate'); 
+            coinName = document.querySelector('.coin-name');
+
+            // weather
+            cloud = document.querySelector('.cloud');
+            seeing = document.querySelector('.seeing');
+            rh2m = document.querySelector('.rh2m');
+            wind_direction = document.querySelector('.wind-direction');
+            wind_speed = document.querySelector('.wind-speed');
+            temp = document.querySelector('.temp');
+            prec_type = document.querySelector('.prec-type');
+            
+            getWeather();
+            getCoinBase();
+        }
+
+        async function getWeather() {
+            fetch('http://www.7timer.info/bin/api.pl?lon=-81.24838510002814&lat=42.98882440253594&product=astro&output=json')
+                .then(res => res.json())
+                .then(res => {
+                    //cloud.innerText = res.dataseries[0].cloudcover;  
+                    //seeing.innerText = res.dataseries[0].seeing;
+                    //rh2m.innerText = res.dataseries[0].rh2m;
+                    //wind_direction.innerText = `${res.dataseries[0].wind10m.direction}°`;
+                    //wind_speed.innerText = res.dataseries[0].wind10m.speed;   
+                    //temp.innerText = `${res.dataseries[0].temp2m}°C`;
+                    //prec_type.innerText = res.dataseries[0].prec_type;
+
+                    temp.innerHTML = '<span>Temp:</span>' + `${res.dataseries[0].temp2m}°C`;
+
+                    if(res.dataseries[0].wind10m.direction == "N") {
+                        wind_direction.innerHTML = '<span>Wind:</span>North';                        
+                    }
+                    else {
+                        wind_direction.innerHTML = '<span>Wind:</span>' + `${res.dataseries[0].wind10m.direction}°`;
+                    }
+                    
+                    // Cloud cover
+                    switch(res.dataseries[0].cloudcover) {
+                        case 1:
+                            cloud.innerHTML = "<span>Cloud:</span>0%-6%";                            
+                            break;
+                        case 2:
+                            cloud.innerHTML = "<span>Cloud:</span>6%-19%";                            
+                            break;
+                        case 3:
+                            cloud.innerHTML = "<span>Cloud:</span>19%-31%";                            
+                            break;
+                        case 4:
+                            cloud.innerHTML = "<span>Cloud:</span>31%-44%";                            
+                            break;
+                        case 5:
+                            cloud.innerHTML = "<span>Cloud:</span>44%-56%";                            
+                            break;
+                        case 6:
+                            cloud.innerHTML = "<span>Cloud:</span>56%-69%";                            
+                            break;
+                        case 7:
+                            cloud.innerHTML = "<span>Cloud:</span>69%-81%";                            
+                            break;
+                        case 8:
+                            cloud.innerHTML = "<span>Cloud:</span>81%-94%";                            
+                            break;     
+                        case 9:
+                            cloud.innerHTML = "<span>Cloud:</span>94%-100%";                       
+                        default:
+                            cloud.innerHTML = "<span>Cloud:</span>N/A";
+                            break;                        
+                    }
+
+                    // Seeing
+                    switch(res.dataseries[0].seeing) {
+                        case 1:
+                            seeing.innerHTML = '<span>Seeing:</span><0.5"';                            
+                            break;
+                        case 2:
+                            seeing.innerHTML = '<span>Seeing:</span>0.5-0.75"';                            
+                            break;
+                        case 3:
+                            seeing.innerHTML = '<span>Seeing:</span>0.75-1"';                            
+                            break;
+                        case 4:
+                            seeing.innerHTML = '<span>Seeing:</span>1-1.25"';                            
+                            break;
+                        case 5:
+                            seeing.innerHTML = '<span>Seeing:</span>1.25-1.5"';                            
+                            break;
+                        case 6:
+                            seeing.innerHTML = '<span>Seeing:</span>1.5-2"';                            
+                            break;
+                        case 7:
+                            seeing.innerHTML = '<span>Seeing:</span>2-2.5"';                            
+                            break;
+                        case 8:
+                            seeing.innerHTML = '<span>Seeing:</span>>2.5"';                            
+                            break;
+                        default:
+                            seeing.innerHTML = "<span>Seeing:</span>N/A";
+                            break;                        
+                    }
+
+                    // Relative Humidity
+                    switch(res.dataseries[0].rh2m) {
+                        case -4:
+                            rh2m.innerHTML = "<span>Humidity:</span>0%-5%";
+                            break;
+                        case -3:
+                            rh2m.innerHTML = "<span>Humidity:</span>5%-10%";
+                            break;
+                        case -2:
+                            rh2m.innerHTML = "<span>Humidity:</span>10%-15%";
+                            break;
+                        case -1:
+                            rh2m.innerHTML = "<span>Humidity:</span>15%-20%";
+                            break;
+                        case 0:
+                            rh2m.innerHTML = "<span>Humidity:</span>20%-25%";
+                            break;
+                        case 1:
+                            rh2m.innerHTML = "<span>Humidity:</span>25%-30%";
+                            break;
+                        case 2:
+                            rh2m.innerHTML = "<span>Humidity:</span>30%-35%";
+                            break;
+                        case 3:
+                            rh2m.innerHTML = "<span>Humidity:</span>35%-40%";
+                            break;
+                        case 4:
+                            rh2m.innerHTML = "<span>Humidity:</span>40%-45%";
+                            break;
+                        case 5:
+                            rh2m.innerHTML = "<span>Humidity:</span>45%-50%";
+                            break;
+                        case 6:
+                            rh2m.innerHTML = "<span>Humidity:</span>50%-55%";
+                            break;
+                        case 7:
+                            rh2m.innerHTML = "<span>Humidity:</span>55%-60%";
+                            break;
+                        case 8:
+                            rh2m.innerHTML = "<span>Humidity:</span>60%-65%";
+                            break;
+                        case 9:
+                            rh2m.innerHTML = "<span>Humidity:</span>65%-70%";
+                            break;
+                        case 10:
+                            rh2m.innerHTML = "<span>Humidity:</span>70%-75%";
+                            break;
+                        case 11:
+                            rh2m.innerHTML = "<span>Humidity:</span>75%-80%";
+                            break;
+                        case 12:
+                            rh2m.innerHTML = "<span>Humidity:</span>80%-85%";
+                            break;
+                        case 13:
+                            rh2m.innerHTML = "<span>Humidity:</span>85%-90%";
+                            break;
+                        case 14:
+                            rh2m.innerHTML = "<span>Humidity:</span>90%-95%";
+                            break;
+                        case 15:
+                            rh2m.innerHTML = "<span>Humidity:</span>95%-99%";
+                            break;
+                        case 16:
+                            rh2m.innerHTML = "<span>Humidity:</span>100%";
+                            break;                            
+                        default:
+                            rh2m.innerHTML = "<span>Humidity:</span>N/A";
+                            break;
+                    }
+
+                    // Wind speed 
+                    switch(res.dataseries[0].wind10m.speed) {
+                        case 1:
+                            wind_speed.innerHTML = "<span>Speed:</span>Below 0.3m/s (calm)";
+                            wind_speed.className = "wind-speed calm";
+                            break;
+                        case 2:
+                            wind_speed.innerHTML = "<span>Speed:</span>0.3-3.4m/s (light)";
+                            wind_speed.className = "wind-speed light";
+                            break;
+                        case 3:
+                            wind_speed.innerHTML = "<span>Speed:</span>3.4-8.0m/s (moderate)";
+                            wind_speed.className = "wind-speed moderate";
+                            break;
+                        case 4:
+                            wind_speed.innerHTML = "<span>Speed:</span>8.0-10.8m/s (fresh)";
+                            wind_speed.className = "wind-speed fresh";
+                            break;
+                        case 5:
+                            wind_speed.innerHTML = "<span>Speed:</span>10.8-17.2m/s (strong)";
+                            wind_speed.className = "wind-speed strong";
+                            break;     
+                        case 6:
+                            wind_speed.innerHTML = "<span>Speed:</span>17.2-24.5m/s (gale)";
+                            wind_speed.className = "wind-speed gale";
+                            break;    
+                        case 7:
+                            wind_speed.innerHTML = "<span>Speed:</span>24.5-32.6m/s (storm)";
+                            wind_speed.className = "wind-speed storm";
+                            break; 
+                        case 8:
+                            wind_speed.innerHTML = "<span>Speed:</span>32.6-36.7m/s (hurricane)";
+                            wind_speed.className = "wind-speed hurricane";
+                            break;    
+                        case 9:
+                            wind_speed.innerHTML = "<span>Speed:</span>36.7-41.4m/s (hurricane+)";
+                            wind_speed.className = "wind-speed hurricane";
+                            break;   
+                        case 10:
+                            wind_speed.innerHTML = "<span>Speed:</span>41.4-46.2m/s (hurricane+)";
+                            wind_speed.className = "wind-speed hurricane";
+                            break;  
+                        case 11:
+                            wind_speed.innerHTML = "<span>Speed:</span>46.2-50.9m/s (hurricane+)";
+                            wind_speed.className = "wind-speed hurricane";
+                            break; 
+                        case 12:
+                            wind_speed.innerHTML = "<span>Speed:</span>50.9-55.9m/s (hurricane+)";
+                            wind_speed.className = "wind-speed hurricane";
+                            break; 
+                        case 13:
+                            wind_speed.innerHTML = "<span>Speed:</span>Over 55.9m/s (hurricane+)";
+                            wind_speed.className = "wind-speed hurricane";
+                            break; 
+                        default:
+                            wind_speed.innerHTML = "<span>Speed:</span>N/A";
+                            wind_speed.className = "wind-speed";
+                            break;
+                    }   
+
+                    // Precipitation type
+                    switch(res.dataseries[0].prec_type) {
+                        case 0 || "none":
+                            prec_type.innerHTML = "<span>Precipitation:</span>None";
+                            prec_type.className = "prec-type rain-0";
+                            break;
+                        case 1:
+                            prec_type.innerHTML = "<span>Precipitation:</span>0-0.25mm/hr";
+                            prec_type.className = "prec-type rain-1";
+                            break;
+                        case 2:
+                            prec_type.innerHTML = "<span>Precipitation:</span>0.25-1mm/hr";
+                            prec_type.className = "prec-type rain-2";
+                            break;
+                        case 3:
+                            prec_type.innerHTML = "<span>Precipitation:</span>1-4mm/hr";
+                            prec_type.className = "prec-type rain-3";
+                            break;
+                        case 4:
+                            prec_type.innerHTML = "<span>Precipitation:</span>4-10mm/hr";
+                            prec_type.className = "prec-type rain-4";
+                            break;
+                        case 5:
+                            prec_type.innerHTML = "<span>Precipitation:</span>10-16mm/hr";
+                            prec_type.className = "prec-type rain-5";
+                            break;
+                        case 6:
+                            prec_type.innerHTML = "<span>Precipitation:</span>16-30mm/hr";
+                            prec_type.className = "prec-type rain-6";
+                            break;
+                        case 7:
+                            prec_type.innerHTML = "<span>Precipitation:</span>30-50mm/hr";
+                            prec_type.className = "<span>Precipitation:</span>prec-type rain-7";
+                            break;
+                        case 8:
+                            prec_type.innerHTML = "<span>Precipitation:</span>50-75mm/hr";
+                            prec_type.className = "prec-type rain-8";
+                            break;
+                        case 9:
+                            prec_type.innerHTML = "<span>Precipitation:</span>75+mm/hr";
+                            prec_type.className = "prec-type rain-9";
+                            break;
+                        default:
+                            prec_type.innerHTML = "<span>Precipitation:</span>" + `${res.dataseries[0].prec_type}`;
+                            prec_type.className = "prec-type";
+                            break;
+                    }   
+
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+
+        //Fill up the coin base box
+        function getCoinBase() {
+            fetch("https://api.coinbase.com/v2/currencies")
+                .then(res => res.json())
+                .then(res => {   
+                    for(i=0; i<res.data.length; i++) {
+                        coinName.innerHTML += `<option value=${res.data[i].id}> ${res.data[i].name} </option>`;
+                    }          
+                })
+                .catch(err => {
+                    console.log(err);
+                })   
+        }
+
+        //Fetch age based on name
+        function FetchNameAge() {
+            const nameSelected = search.value.toLowerCase();
+
+            fetch(`https://api.agify.io?name=${nameSelected}&country_id=CA`)
+                .then(result => result.json())                
+                .then(result => {
+                    myName.innerText = `Name selected: ${result.name}`;
+                    age.innerText = `Age: ${result.age ? result.age : "Not found"}`;
+                    country.innerText = `Country: ${result.country_id}`;
+                    count.innerText = `Counter: ${result.count ? result.count : "Not found"}`;
+                })             
+                .catch(error => {
+                    console.log(error);
+                    myName.innerText = "Name not found in our database";
+                    age.innerText = "";
+                    country.innerText = "";
+                    count.innerText = "";
+                })            
+        }    
+
+        // Calculating coin exchange
+        function CoinsExchange() {            
+            const coinExc = coin_Exc.value.toUpperCase();
+            
+            fetch(`https://api.coinbase.com/v2/prices/BTC-${coinExc}/buy`)
+                .then(res => res.json())
+                .then(res => {
+                    coinRate.innerText = `Coin rate: ${res.data.amount}`;
+                    coinExchange.innerText = `Coin Value: ${coin_Amount.value * res.data.amount}`;
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+   
+        // Get coin ID   
+        function SelectedCoin() {
+            coin_Exc.value = document.getElementById("coin-id").value;
+            console.log("click");
+        }  
+
+    </script>
+
+</head>
+
+<body>
+    <div class="top">        
+        <h1> Fetch API </h1>
+    </div>
+
+    <div class="container">
+        <h3> Predict the age of a name </h3> 
+
+        <form class="form container-align" onsubmit="FetchNameAge(); return false">
+            <input class="search-bar">
+            <!-- <input class="submit-button" type="submit"> -->
+        </form>
+        
+        <div class="my-name">  </div>
+        <div class="age">  </div>
+        <div class="count">  </div>
+        <div class="country"></div>
+    </div>
+
+    <div class="weather container" >
+        <h3> Weather </h3>
+        <div class="forecast contaier-align">
+            <div class="cloud"> </div>
+            <div class="seeing"> </div>
+            <div class="rh2m"> </div>
+            <div class="wind-direction"> </div>
+            <div class="wind-speed"> </div>
+            <div class="temp"> </div>
+            <div class="prec-type"> </div>
+        </div>
+    </div>
+
+    <div class="coins container">
+        <h3> Bitcoin exchange </h3>
+
+        <form class="form-exc container-align" onsubmit="CoinsExchange(); return false">
+            <select id="coin-id" class="coin-name" onchange="SelectedCoin()"> </select>
+            <br>
+            <input class="coin-exc coin-input" type="text" size="5">    
+            <input class="coin-amount coin-input" type="text" size="10">              
+             
+            <input class="submit-coin" type="submit" value="Calculate">      
+        </form>
+        
+        <div class="exchange coin-color">  </div>
+        <div class="rate coin-color">  </div>
+    </div>
+
+    <div class="footer">
+        A project by Allan Viveiros
+    </div>
+    
+</body>
+</html>
